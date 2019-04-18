@@ -1,0 +1,9 @@
+<h1>YCBA - Remove record from catalog</h1>
+
+<%= form_tag("/home/confirm", method: "get") do %>
+  <%= label_tag(:code, "Code:") %>
+  <%= text_field_tag(:code) %>
+  <%= label_tag(:id, "Solr ID:") %>
+  <%= text_field_tag(:id) %>
+  <%= submit_tag("Search") %>
+<% end %>

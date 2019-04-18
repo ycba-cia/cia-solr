@@ -1,0 +1,16 @@
+<h1>YCBA - Remove record from catalog</h1>
+<% if @ok==true %>
+  <p>You are attempting to remove: <%= @id %></p>
+  <%= @return.html_safe %>
+  <% if @found==true %>
+    <%= form_tag("/home/submit", method: "get") do %>
+      <%= hidden_field_tag(:solr_id, @id) %>
+      <%= submit_tag("Remove!",style: "color:red;") %>
+    <% end %>
+  <%end %>
+  </br>
+  <a href="/home/index">Go back</a>
+<% else %>
+  <p>Invalid Code</p>
+  <a href="/home/index">Go back</a>
+<% end %>
