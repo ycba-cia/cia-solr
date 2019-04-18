@@ -21,8 +21,11 @@ class HomeController < ApplicationController
         title = ""
         author = ""
         @found = true
-        title = lookup["response"]["docs"][0]["title_ss"][0] if lookup["response"]["docs"][0]["title_ss"][0]
-        author = lookup["response"]["docs"][0]["author_ss"][0] if lookup["response"]["docs"][0]["author_ss"][0]
+        begin
+          title = lookup["response"]["docs"][0]["title_ss"][0]
+          author = lookup["response"]["docs"][0]["author_ss"][0]
+        rescue
+        end
         @return = "<p><b>Title:</b>"+title+"</p>"
         @return += "<p><b>Author:</b>"+author+"</p>"
       else
@@ -36,6 +39,7 @@ class HomeController < ApplicationController
 
   def submit
     @solr_id = params["solr_id"]
-    #@solr.delete_by_id @solr_id
+    @solr.delete_by_id @solr_id
+    @solr.commit
   end
 end
