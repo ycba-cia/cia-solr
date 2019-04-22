@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   def solr_connect
     y = YAML.load_file("#{Rails.root.to_s}/config/solr.yml")
     @solr = RSolr.connect :url => y["url"]
+    @config_code = y["code"]
   end
 
   def index
@@ -13,8 +14,9 @@ class HomeController < ApplicationController
   def confirm
     @id = params["id"]
     @code = params["code"]
-    code = "132435467"
-    if code == @code
+    #puts @code
+    #puts @config_code
+    if @config_code.to_s == @code.to_s
       @ok = true
       lookup = @solr.select :params => { :fq => "id:\"#{@id}\"" }
       if lookup["response"]["numFound"] == 1
@@ -39,7 +41,7 @@ class HomeController < ApplicationController
 
   def submit
     @solr_id = params["solr_id"]
-    @solr.delete_by_id @solr_id
-    @solr.commit
+    #@solr.delete_by_id @solr_id
+    #@solr.commit
   end
 end
