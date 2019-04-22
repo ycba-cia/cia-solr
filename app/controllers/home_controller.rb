@@ -41,7 +41,7 @@ class HomeController < ApplicationController
 
   def submit
     @solr_id = params["solr_id"]
-    #@solr.delete_by_id @solr_id
-    #@solr.commit
+    @solr.delete_by_id @solr_id
+    @solr.commit
   end
 end
