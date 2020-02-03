@@ -4,7 +4,11 @@ class HomeController < ApplicationController
 
   def solr_connect
     y = YAML.load_file("#{Rails.root.to_s}/config/solr.yml")
+    @solrs = Array.new
     @solr = RSolr.connect :url => y["url"]
+    @solr2 = RSolr.connect :url => y["url2"]
+    @solrs.push(@solr)
+    @solrs.push(@solr2)
     @config_code = y["code"]
   end
 
@@ -18,6 +22,9 @@ class HomeController < ApplicationController
     #puts @config_code
     if @config_code.to_s == @code.to_s
       @ok = true
+      if insynch? == false
+        @return = "<p><font color=\"red\">Warning indexes don't match!</font></p>"
+      end
       lookup = @solr.select :params => { :fq => "id:\"#{@id}\"" }
       if lookup["response"]["numFound"] == 1
         title = ""
@@ -28,7 +35,7 @@ class HomeController < ApplicationController
           author = lookup["response"]["docs"][0]["author_ss"][0]
         rescue
         end
-        @return = "<p><b>Title:</b>"+title+"</p>"
+        @return += "<p><b>Title:</b>"+title+"</p>"
         @return += "<p><b>Author:</b>"+author+"</p>"
       else
         @found = false
@@ -43,5 +50,19 @@ class HomeController < ApplicationController
     @solr_id = params["solr_id"]
     @solr.delete_by_id @solr_id
     @solr.commit
+    @solr2.delete_by_id @solr_id
+    @solr2.commit
+  end
+
+  def insynch?
+    match = Array.new
+    @solrs.each_with_index do |s, i|
+      match[i] = s.select :params => { :fq => "id:\"#{@id}\"" }
+      #puts s.inspect
+      #puts match[i].inspect
+    end
+    insynch = match.all? {|x| x == match[0]}
+    #puts "insynch #{insynch}"
+    insynch
   end
 end
