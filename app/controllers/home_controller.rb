@@ -22,6 +22,7 @@ class HomeController < ApplicationController
     #puts @config_code
     if @config_code.to_s == @code.to_s
       @ok = true
+      @return = ""
       if insynch? == false
         @return = "<p><font color=\"red\">Warning indexes don't match!</font></p>"
       end
@@ -30,11 +31,8 @@ class HomeController < ApplicationController
         title = ""
         author = ""
         @found = true
-        begin
-          title = lookup["response"]["docs"][0]["title_ss"][0]
-          author = lookup["response"]["docs"][0]["author_ss"][0]
-        rescue
-        end
+        title = lookup["response"]["docs"][0]["title_ss"][0] if lookup["response"]["docs"][0]["title_ss"]
+        author = lookup["response"]["docs"][0]["author_ss"][0] if lookup["response"]["docs"][0]["author_ss"]
         @return += "<p><b>Title:</b>"+title+"</p>"
         @return += "<p><b>Author:</b>"+author+"</p>"
       else
@@ -57,9 +55,23 @@ class HomeController < ApplicationController
   def insynch?
     match = Array.new
     @solrs.each_with_index do |s, i|
-      match[i] = s.select :params => { :fq => "id:\"#{@id}\"" }
+      lookup = s.select :params => { :fq => "id:\"#{@id}\"" }
+      var = ""
+      if lookup["response"]["numFound"] == 0
+        var += "0"
+      end
+      if lookup["response"]["numFound"] == 1
+        var += "1"
+        if lookup["response"]["docs"][0]["title_ss"]
+          var += lookup["response"]["docs"][0]["title_ss"][0]
+        end
+        if lookup["response"]["docs"][0]["author_ss"]
+          var += lookup["response"]["docs"][0]["author_ss"][0]
+        end
+      end
+      match[i] = var
       #puts s.inspect
-      #puts match[i].inspect
+      puts match[i].inspect
     end
     insynch = match.all? {|x| x == match[0]}
     #puts "insynch #{insynch}"
