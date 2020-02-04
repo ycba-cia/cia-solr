@@ -26,18 +26,22 @@ class HomeController < ApplicationController
       if insynch? == false
         @return = "<p><font color=\"red\">Warning indexes don't match!</font></p>"
       end
-      lookup = @solr.select :params => { :fq => "id:\"#{@id}\"" }
-      if lookup["response"]["numFound"] == 1
-        title = ""
-        author = ""
-        @found = true
-        title = lookup["response"]["docs"][0]["title_ss"][0] if lookup["response"]["docs"][0]["title_ss"]
-        author = lookup["response"]["docs"][0]["author_ss"][0] if lookup["response"]["docs"][0]["author_ss"]
-        @return += "<p><b>Title:</b>"+title+"</p>"
-        @return += "<p><b>Author:</b>"+author+"</p>"
-      else
-        @found = false
-        @return = "<p>ID <b>#{@id}</b> not found</p>"
+      @solrs.each_with_index do |solr, i|
+        ii = i + 1
+        @return += "<p><u>Index "+ii.to_s+"</u><p>"
+        lookup = solr.select :params => { :fq => "id:\"#{@id}\"" }
+        if lookup["response"]["numFound"] == 1
+          title = ""
+          author = ""
+          @found = true
+          title = lookup["response"]["docs"][0]["title_ss"][0] if lookup["response"]["docs"][0]["title_ss"]
+          author = lookup["response"]["docs"][0]["author_ss"][0] if lookup["response"]["docs"][0]["author_ss"]
+          @return += "<p><b>Title:</b>"+title+"</p>"
+          @return += "<p><b>Author:</b>"+author+"</p>"
+        else
+          @found = false
+          @return += "<p>ID <b>#{@id}</b> not found</p>"
+        end
       end
     else
       @ok = false
@@ -55,6 +59,7 @@ class HomeController < ApplicationController
   def insynch?
     match = Array.new
     @solrs.each_with_index do |s, i|
+      ii = i + 1
       lookup = s.select :params => { :fq => "id:\"#{@id}\"" }
       var = ""
       if lookup["response"]["numFound"] == 0
@@ -71,7 +76,7 @@ class HomeController < ApplicationController
       end
       match[i] = var
       #puts s.inspect
-      puts match[i].inspect
+      puts "Match#{ii.to_s}:#{match[i].inspect}"
     end
     insynch = match.all? {|x| x == match[0]}
     #puts "insynch #{insynch}"
