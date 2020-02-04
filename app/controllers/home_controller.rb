@@ -23,6 +23,7 @@ class HomeController < ApplicationController
     if @config_code.to_s == @code.to_s
       @ok = true
       @return = ""
+      @found = false
       if insynch? == false
         @return = "<p><font color=\"red\">Warning indexes don't match!</font></p>"
       end
@@ -39,7 +40,6 @@ class HomeController < ApplicationController
           @return += "<p><b>Title:</b>"+title+"</p>"
           @return += "<p><b>Author:</b>"+author+"</p>"
         else
-          @found = false
           @return += "<p>ID <b>#{@id}</b> not found</p>"
         end
       end
