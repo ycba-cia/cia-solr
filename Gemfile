@@ -70,3 +70,5 @@ gem 'rsolr'
 gem 'nokogiri', '~> 1.11.0'
 
 gem "rack", ">= 2.2.3"
+
+gem "addressable", ">= 2.8.0"
