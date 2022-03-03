@@ -2,9 +2,14 @@
 <% if @ok==true %>
   <p>You are attempting to remove: <%= @id %></p>
   <%= @return.html_safe %>
-  <% if @found==true %>
+  <% if @found==true || @found2==true %>
     <%= form_tag("/home/submit", method: "get") do %>
-      <%= hidden_field_tag(:solr_id, @id) %>
+      <% if @found==true %>
+        <%= hidden_field_tag(:solr_id, @id) %>
+      <% end %>
+      <% if @found2==true %>
+        <%= hidden_field_tag(:iiif_id, @id) %>
+      <% end %>
       <%= submit_tag("Remove!",style: "color:red;", data: { confirm: "Are you sure you want to delete?" }) %>
     <% end %>
   <%end %>

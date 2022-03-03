@@ -72,3 +72,5 @@ gem 'nokogiri', '~> 1.13.2'
 gem "rack", ">= 2.2.3"
 
 gem "addressable", ">= 2.8.0"
+
+gem 'mysql2', '~> 0.5.3'

@@ -10,6 +10,16 @@ class HomeController < ApplicationController
     @solrs.push(@solr)
     @solrs.push(@solr2)
     @config_code = y["code"]
+
+    as_hostname = y["as_hostname"]
+    as_username = y["as_username"]
+    as_password = y["as_password"]
+    as_databasename = y["as_databasename"]
+    sslca = y['sslca']
+    sslca_path = "#{Rails.root.to_s}/#{sslca}"
+    @as_client = Mysql2::Client.new(:host=>as_hostname,:username=>as_username,:password=>as_password,:database=>as_databasename,:sslca=>sslca_path)
+    puts "activitystream1 ping:#{@as_client.ping}"
+
   end
 
   def index
@@ -24,6 +34,7 @@ class HomeController < ApplicationController
       @ok = true
       @return = ""
       @found = false
+      @found2 = false
       if insynch? == false
         @return = "<p><font color=\"red\">Warning indexes don't match!</font></p>"
       end
@@ -43,17 +54,34 @@ class HomeController < ApplicationController
           @return += "<p>ID <b>#{@id}</b> not found</p>"
         end
       end
+      as_row_data = getAS(@id)
+      if as_row_data == []
+        @return +="<p>Manifest for <b>#{@id}</b> not found</p>"
+      else
+        @found2 = true
+        @return += "<p><u>IIIF</u><p>"
+        @return += "<p><b>To be deleted:</b>#{as_row_data[0][2]}</p>"
+      end
     else
       @ok = false
     end
   end
 
   def submit
-    @solr_id = params["solr_id"]
-    @solr.delete_by_id @solr_id
-    @solr.commit
-    @solr2.delete_by_id @solr_id
-    @solr2.commit
+    if params["solr_id"].present?
+      puts "in delete from solr"
+      @solr_id = params["solr_id"]
+      @solr.delete_by_id @solr_id
+      @solr.commit
+      @solr2.delete_by_id @solr_id
+      @solr2.commit
+    end
+    if params["iiif_id"].present?
+      puts "in delete from iiif"
+      @iiif_id = params["iiif_id"]
+      delete_to_actstream(@iiif_id)
+    end
+    end
   end
 
   def insynch?
@@ -82,4 +110,23 @@ class HomeController < ApplicationController
     #puts "insynch #{insynch}"
     insynch
   end
-end
+
+  def getAS(id)
+    row_data = []
+    q = "select id,mdid,mdurl from asmetadata4 where mdid = '#{id}'"
+    puts q
+    s = @as_client.query(q)
+    s.each do |row|
+      row_data.push([row["id"],row["mdid"],row["mdurl"]])
+    end
+    puts "Row:#{row_data.inspect}"
+    row_data
+  end
+
+  def delete_to_actstream(id)
+    q = "UPDATE asmetadata4 set created=NOW(),statustype='delete' "+
+        "where mdid = '#{id}'"
+    puts q
+    @as_client.query(q)
+  end
+
