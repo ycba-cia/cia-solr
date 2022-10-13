@@ -17,7 +17,9 @@ class HomeController < ApplicationController
     as_databasename = y["as_databasename"]
     sslca = y['sslca']
     sslca_path = "#{Rails.root.to_s}/#{sslca}"
-    @as_client = Mysql2::Client.new(:host=>as_hostname,:username=>as_username,:password=>as_password,:database=>as_databasename,:sslca=>sslca_path)
+    if @as_client.nil? or @as_client.closed?
+      @as_client = Mysql2::Client.new(:host=>as_hostname,:username=>as_username,:password=>as_password,:database=>as_databasename,:sslca=>sslca_path)
+    end
     puts "activitystream1 ping:#{@as_client.ping}"
 
   end
