@@ -60,7 +60,7 @@ group :test do
 end
 
 group :production do
-  gem 'mini_racer', '0.6.2', platforms: :ruby
+  gem 'mini_racer', platforms: :ruby
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
