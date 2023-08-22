@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.8'
@@ -9,6 +9,7 @@ gem 'rails', '~> 5.2.8'
 gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '5.6.7'
+gem 'puma-daemon', require: false
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -59,7 +60,7 @@ group :test do
 end
 
 group :production do
-  gem 'mini_racer', platforms: :ruby
+  gem 'mini_racer', '0.6.2', platforms: :ruby
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
