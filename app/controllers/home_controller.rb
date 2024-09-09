@@ -1,6 +1,11 @@
 class HomeController < ApplicationController
 
   before_action :solr_connect, only: [:confirm,:submit]
+  after_action :solr_close, only: [:confirm,:submit]
+
+  def solr_close
+    @as_client.close
+  end  
 
   def solr_connect
     y = YAML.load_file("#{Rails.root.to_s}/config/solr.yml")
