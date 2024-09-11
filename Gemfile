@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.7'
+ruby '3.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.8'
+#gem 'rails', '~> 5.2.8'
+gem 'rails', '~> 6.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '5.6.7'
 gem 'puma-daemon', require: false
@@ -68,10 +69,22 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'rsolr'
 
-gem 'nokogiri', '~> 1.14.3'
+#gem 'nokogiri', '~> 1.14.3'
+gem 'nokogiri', '~> 1.16', '>= 1.16.7'
 
 gem "rack", ">= 2.2.3"
 
 gem "addressable", ">= 2.8.0"
 
 gem 'mysql2', '~> 0.5.3'
+
+gem 'devise'
+
+#https://github.com/yalelibrary/yul-dc-blacklight/blob/main/Gemfile
+gem 'omniauth', '~> 1.9.2'
+gem 'omniauth-cas'
+gem 'omniauth-rails_csrf_protection', '~> 0.1'
+
+gem 'sorted_set'
+
+#gem 'bundler', '2.5.18'
