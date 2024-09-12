@@ -83,7 +83,7 @@ gem 'devise'
 #https://github.com/yalelibrary/yul-dc-blacklight/blob/main/Gemfile
 gem 'omniauth', '~> 1.9.2'
 gem 'omniauth-cas'
-gem 'omniauth-rails_csrf_protection', '~> 0.1'
+#gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem 'sorted_set'
 
