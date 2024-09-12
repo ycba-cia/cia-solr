@@ -160,7 +160,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     public_suffix (6.0.1)
-    puma (5.6.7)
+    puma (5.6.8)
       nio4r (~> 2.0)
     puma-daemon (0.3.2)
       puma (>= 5.0)
@@ -289,7 +289,7 @@ DEPENDENCIES
   nokogiri (~> 1.16, >= 1.16.7)
   omniauth (~> 1.9.2)
   omniauth-cas
-  puma (= 5.6.7)
+  puma (= 5.6.8)
   puma-daemon
   rack (>= 2.2.3)
   rails (~> 6.1)
