@@ -1,0 +1,28 @@
+.ruby-version
+Gemfile
+Gemfile.lock
+Global-bundle.pem
+Rails g devise:install 
+	create  config/initializers/devise.rb
+	create  config/locales/devise.en.yml
+Rails g devise:user
+	create    db/migrate/20240911181438_devise_create_users.rb
+      create    app/models/user.rb
+      invoke    test_unit
+      create      test/models/user_test.rb
+      create      test/fixtures/users.yml
+      insert    app/models/user.rb
+       route  devise_for :users
+rails g migration AddOmniauthToUsers provider:string uuid:string
+	create    db/migrate/20240911182157_add_omniauth_to_users.rb
+rails g migration AddModuleToUsers module:string
+	create    db/migrate/20240911182358_add_module_to_users.rb
+Rake db:migrate
+rails g migration FixColumnName
+	rename_column :users, :uuid, :uid
+Unauth.html
+rake db:migrate RAILS_ENV=production
+EDITOR="vi --wait" bin/rails credentials:edit
+bundle update --bundler
+bundle exec rake assets:precompile RAILS_ENV=production
+Remove gem 'omniauth-rails_csrf_protection', '~> 0.1'
