@@ -2,8 +2,10 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # ERJ 9/11/2024 - added :omniauthable and from_omniauth and get_modules
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+  #devise :database_authenticatable, :registerable,
+  #       :recoverable, :rememberable, :validatable, :omniauthable
+  # ERJ 9/16/2024 remove registerable and recoverable
+  devise :database_authenticatable, :rememberable, :validatable, :omniauthable
 
   def self.from_omniauth(auth)
     find_by(provider: auth.provider, uid: auth.uid)
