@@ -159,6 +159,9 @@ GEM
       addressable (~> 2.8)
       nokogiri (~> 1.12)
       omniauth (~> 2.1)
+    omniauth-rails_csrf_protection (1.0.2)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     orm_adapter (0.5.0)
     public_suffix (6.0.1)
     puma (5.6.8)
@@ -293,6 +296,7 @@ DEPENDENCIES
   nokogiri (~> 1.16, >= 1.16.7)
   omniauth (~> 2.1)
   omniauth-cas (~> 3.0.0)
+  omniauth-rails_csrf_protection (~> 1.0.2)
   puma (= 5.6.8)
   puma-daemon
   rack (>= 2.2.3)
