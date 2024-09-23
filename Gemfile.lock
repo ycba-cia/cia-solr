@@ -164,7 +164,7 @@ GEM
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     public_suffix (6.0.1)
-    puma (5.6.8)
+    puma (6.4.3)
       nio4r (~> 2.0)
     puma-daemon (0.3.2)
       puma (>= 5.0)
@@ -297,7 +297,7 @@ DEPENDENCIES
   omniauth (~> 2.1)
   omniauth-cas (~> 3.0.0)
   omniauth-rails_csrf_protection (~> 1.0.2)
-  puma (= 5.6.8)
+  puma (~> 6.4)
   puma-daemon
   rack (>= 2.2.3)
   rails (~> 6.1)
