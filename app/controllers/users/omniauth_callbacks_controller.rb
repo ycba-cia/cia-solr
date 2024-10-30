@@ -9,6 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(auth)
     if @user.nil? == false && @user.persisted?
       puts "authenticated!"
+      session["netid"] = auth["uid"]
       sign_in @user, event: :authentication
       redirect_to home_index_path
       #set_flash_message(:notice, :success, kind: "CAS") if is_navigational_format?
