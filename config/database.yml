@@ -10,8 +10,18 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  primary:
+    <<: *default
+    database: db/development.sqlite3
+  frames:
+    adapter: mysql2
+    encoding: utf8
+    username: collectionsuser
+    password: <%= ENV.fetch("DB1PW") %>
+    host: ycba-collections-db.ctsmybupmova.us-east-1.rds.amazonaws.com
+    database: ycba_collections_db
+    port: 3306
+    sslca: /Users/ermadmix/Documents/RubymineProjects/cia-solr/config/global-bundle.pem
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,5 +31,15 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  primary:
+    <<: *default
+    database: db/production.sqlite3
+  frames:
+    adapter: mysql2
+    encoding: utf8
+    username: collectionsuser
+    password: <%= ENV.fetch("DB1PW") %>
+    host: ycba-collections-db.ctsmybupmova.us-east-1.rds.amazonaws.com
+    database: ycba_collections_db
+    port: 3306
+    sslca: /Users/ermadmix/Documents/RubymineProjects/cia-solr/config/global-bundle.pem
