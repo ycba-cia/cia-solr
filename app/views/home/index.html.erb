@@ -1,5 +1,5 @@
 <h1>YCBA - Remove record from catalog</h1>
-<p>You're are logged in as: <b><%= session[:netid] %></b></p>
+<p>You are logged in as: <b><%= current_user.uid %></b></p>
 
 <%= form_tag("/home/confirm", method: "get") do %>
   <%#= label_tag(:code, "Code:") %>
