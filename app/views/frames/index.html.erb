@@ -1,0 +1,9 @@
+<h1>YCBA - Match object to frame</h1>
+<p>You are logged in as: <b><%= current_user.uid %></b></p>
+
+<%= form_tag("/frames/confirm", method: "get") do  %>
+  <%= radio_button_tag :idtype, "objectid", checked = true %>Object ID
+  <%= radio_button_tag :idtype, "accnumber" %>Accession Number
+  <%= text_field_tag(:id) %>
+  <%= submit_tag("Find Frame") %>
+<% end %>
