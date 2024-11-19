@@ -1,0 +1,20 @@
+.locnaf table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.locnaf td, th {
+  font-size: 12px;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.locnaf tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.paginate {
+  font-family: arial, sans-serif;
+}

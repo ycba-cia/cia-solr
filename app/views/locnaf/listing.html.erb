@@ -1,0 +1,18 @@
+<h3>YCBA - locnaf mapping master list</h3>
+<div class="paginate">
+  <%= paginate @t%>
+</div>
+<div class="span1">
+  <table class="locnaf">
+    <tr class="locnaf">
+      <th>LOCNAF original name</th>
+      <th>YCBA mapped name </th>
+    </tr>
+    <% @t.each do |t| %>
+      <tr class="locnaf">
+        <td><%= t.input_name %></td>
+        <td><%= t.output_name %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

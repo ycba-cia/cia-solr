@@ -89,4 +89,6 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0.2'
 
 gem 'sorted_set'
 
+gem 'kaminari'
+
 #gem 'bundler', '2.5.18'

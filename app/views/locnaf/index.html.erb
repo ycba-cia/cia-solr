@@ -1,0 +1,45 @@
+<h3>YCBA - mapping of locnaf constituents to ycba nomenclature</h3>
+<p>You are logged in as: <b><%= current_user.uid %></b></p>
+<div><%= button_to "Full List", locnaf_listing_path, target: :_blank, :method => :get %></div>
+</br>
+
+<p><b>Lookup Name</b></p>
+<%= form_tag("/locnaf/lookup", method: "get") do  %>
+  <%= text_field_tag(:name) %>
+  <%= submit_tag("Lookup Name") %>
+<% end %>
+</br>
+<p><b>Example Listing</b></p>
+<div class="span1">
+  <table class="locnaf">
+    <tr class="locnaf">
+      <th>LOCNAF original name</th>
+      <th>YCBA mapped name </th>
+    </tr>
+    <tr class="locnaf">
+      <td>Akomfrah, John</td>
+      <td>Akomfrah, John, Sir, born 1957</td>
+    </tr>
+    <tr class="locnaf">
+      <td>Barralet, John James, approximately 1747-1815</td>
+      <td>John James Barralet, 1747–1815</td>
+    </tr>
+    <tr class="locnaf">
+      <td>Bluck, John (Printmaker)</td>
+      <td>John Bluck, active 1791–1819</td>
+    </tr>
+    <tr class="locnaf">
+      <td>Lavery, John, 1856-1941</td>
+      <td>Lavery, John, Sir, 1856–1941</td>
+    </tr>
+  </table>
+</div>
+<p><b>Editing Note</b></p>
+<p>Note that the original name uses this dash: - which is unicode \u002d</p>
+<p>While the mapped name uses this dash: – which is unicode \u2013 and slightly longer than the former</p>
+<p><b>Add a mapping</b></p>
+<%= form_tag("/locnaf/confirm", method: "get") do  %>
+  <p>Input&nbsp;&nbsp;&nbsp;<%= text_field_tag(:input_name, nil, size: 50) %></p>
+  <p>Output&nbsp;<%= text_field_tag(:output_name, nil, size: 50) %></p>
+  <p><%= submit_tag("Add Mapping") %></p>
+<% end %>

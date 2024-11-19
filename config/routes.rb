@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   get 'frames/submit', to: "frames#submit"
   get 'frames/new', to: "frames#new"
 
+  get 'locnaf/index'
+  get 'locnaf/listing', to: "locnaf#listing"
+  get 'locnaf/lookup', to: "locnaf#lookup"
+  get 'locnaf/confirm', to: "locnaf#confirm"
+
   #ERJ 9/11/2024 added devise_for
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   get '/unauth', :to => redirect('/unauth.html'), as: :unauth

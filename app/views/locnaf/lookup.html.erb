@@ -1,0 +1,21 @@
+<h3>YCBA - locnaf lookup</h3>
+<p><a href="/locnaf/index">Go back</a></p>
+<p>Lookup of <b><%= @name %></b> in original name</p>
+</br>
+<div class="span1">
+  <table class="locnaf">
+    <tr class="locnaf">
+      <th>LOCNAF original name</th>
+      <th>YCBA mapped name </th>
+    </tr>
+    <% @namelist.each do |t| %>
+      <tr class="locnaf">
+        <td><%= t[0] %></td>
+        <td><%= t[1] %></td>
+      </tr>
+    <% end %>
+    <% if @namelist.size ==0 %>
+      <td><%= @name %> Does not exist</td>
+    <% end %>
+  </table>
+</div>
