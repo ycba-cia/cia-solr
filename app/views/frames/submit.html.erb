@@ -1,4 +1,11 @@
-<p><%= @objectID %></p>
-<p><%= @objectNumber %></p>
-<p><%= @frameObjectID %></p>
-<p><%= @frameObjectNumber %></p>
+<% if @errormsg.length > 0 %>
+  <h3>Check your input</h3>
+  <div><%= @errormsg.html_safe %></div>
+<% else %>
+  <h3>Frames mapping has been updated:</h3>
+  <p>ObjectID <%= @objectID %></p>
+  <p>Accession Number: <%= @objectNumber %></p>
+  <p>Frames ObjectID: <%= @frameObjectID %></p>
+  <p>Frames Accession Number: <%= @frameObjectNumber %></p>
+<% end %>
+<p><a href="/frames/index">Go back</a></p>

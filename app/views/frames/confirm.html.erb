@@ -4,6 +4,14 @@
   <% elsif @idtype == "accnumber" %>
     <h3>The accession number you have selected <%= @objectNumber %> does not exist.</h3>
   <% end %>
+  <h3>Add a new object/frames mapping:</h3>
+  <%= form_tag("/frames/new", method: "get") do  %>
+    <p>ObjectID:  <%= text_field_tag :objectID, @objectID  %></p>
+    <p>ObjectNumber: <%= text_field_tag :objectNumber, @objectNumber %></p>
+    <p>FrameObjectID:  <%= text_field_tag :frameObjectID  %></p>
+    <p>FrameObjectNumber: <%= text_field_tag :frameObjectNumber %></p>
+    <p><%= submit_tag("Add Frame mapping",data: { confirm: "Are you sure you want to make this change?" }) %></p>
+  <% end %>
 <% else  %>
   <h3>You have chosen the following Object:</h3>
   <p>ObjectId:  <%= @objectID %></p>
