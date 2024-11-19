@@ -6,26 +6,39 @@ class FramesController < ApplicationController
   def confirm
     @idtype = params["idtype"]
     id = params["id"]
+
+    @errormsg = ""
+    if id.length == 0
+      @errormsg += "<p>ID must be populated.</p>"
+    end
     if @idtype == "objectid"
-      @objectID = id
-      f = Frame.where(:objectid => id).first
-      if f.nil?
-        @notfound = id
-      else
-        @frameObjectID = f.FrameObjectID
-        @objectNumber = f.ObjectNumber
-        @frameObjectNumber = f.FrameObjectNumber
+      unless id.to_i.to_s == id
+        @errormsg += "<p>Object ID must be an integer</p>"
       end
     end
-    if @idtype == "accnumber"
-      @objectNumber = id
-      f = Frame.where(:objectnumber => id).first
-      if f.nil?
-        @notfound = id
-      else
-        @frameObjectID = f.FrameObjectID
-        @objectID = f.ObjectID
-        @frameObjectNumber = f.FrameObjectNumber
+
+    if @errormsg.length == 0
+      if @idtype == "objectid"
+        @objectID = id
+        f = Frame.where(:objectid => id).first
+        if f.nil?
+          @notfound = id
+        else
+          @frameObjectID = f.FrameObjectID
+          @objectNumber = f.ObjectNumber
+          @frameObjectNumber = f.FrameObjectNumber
+        end
+      end
+      if @idtype == "accnumber"
+        @objectNumber = id
+        f = Frame.where(:objectnumber => id).first
+        if f.nil?
+          @notfound = id
+        else
+          @frameObjectID = f.FrameObjectID
+          @objectID = f.ObjectID
+          @frameObjectNumber = f.FrameObjectNumber
+        end
       end
     end
   end

@@ -1,29 +1,34 @@
-<% if @notfound.nil? == false %>
-  <% if @idtype == "objectid" %>
-    <h3>The object you have selected <%= @objectID %> does not exist.</h3>
-  <% elsif @idtype == "accnumber" %>
-    <h3>The accession number you have selected <%= @objectNumber %> does not exist.</h3>
-  <% end %>
-  <h3>Add a new object/frames mapping:</h3>
-  <%= form_tag("/frames/new", method: "get") do  %>
-    <p>ObjectID:  <%= text_field_tag :objectID, @objectID  %></p>
-    <p>ObjectNumber: <%= text_field_tag :objectNumber, @objectNumber %></p>
-    <p>FrameObjectID:  <%= text_field_tag :frameObjectID  %></p>
-    <p>FrameObjectNumber: <%= text_field_tag :frameObjectNumber %></p>
-    <p><%= submit_tag("Add Frame mapping",data: { confirm: "Are you sure you want to make this change?" }) %></p>
-  <% end %>
-<% else  %>
-  <h3>You have chosen the following Object:</h3>
-  <p>ObjectId:  <%= @objectID %></p>
-  <p>Accession Number:  <%= @objectNumber %></p>
-  <h3>Enter any changes to the corresponding ObjectID and frame Accession Number:</h3>
+<% if @errormsg.length > 0 %>
+  <h3>Check your input</h3>
+  <div><%= @errormsg.html_safe %></div>
+<% else %>
+  <% if @notfound.nil? == false %>
+    <% if @idtype == "objectid" %>
+      <h3>The object you have selected <%= @objectID %> does not exist.</h3>
+    <% elsif @idtype == "accnumber" %>
+      <h3>The accession number you have selected <%= @objectNumber %> does not exist.</h3>
+    <% end %>
+    <h3>Add a new object/frames mapping:</h3>
+    <%= form_tag("/frames/new", method: "get") do  %>
+      <p>ObjectID:  <%= text_field_tag :objectID, @objectID  %></p>
+      <p>ObjectNumber: <%= text_field_tag :objectNumber, @objectNumber %></p>
+      <p>FrameObjectID:  <%= text_field_tag :frameObjectID  %></p>
+      <p>FrameObjectNumber: <%= text_field_tag :frameObjectNumber %></p>
+      <p><%= submit_tag("Add Frame mapping",data: { confirm: "Are you sure you want to make this change?" }) %></p>
+    <% end %>
+  <% else  %>
+    <h3>You have chosen the following Object:</h3>
+    <p>ObjectId:  <%= @objectID %></p>
+    <p>Accession Number:  <%= @objectNumber %></p>
+    <h3>Enter any changes to the corresponding ObjectID and frame Accession Number:</h3>
 
-  <%= form_tag("/frames/submit", method: "get") do  %>
-    <p>FrameObjectID:  <%= text_field_tag :frameObjectID, @frameObjectID  %></p>
-    <p>FrameObjectNumber: <%= text_field_tag :frameObjectNumber, @frameObjectNumber %></p>
-    <%= hidden_field_tag(:objectNumber, @objectNumber) %>
-    <%= hidden_field_tag(:objectID, @objectID) %>
-    <p><%= submit_tag("Remap Frame",data: { confirm: "Are you sure you want to make this change?" }) %></p>
+    <%= form_tag("/frames/submit", method: "get") do  %>
+      <p>FrameObjectID:  <%= text_field_tag :frameObjectID, @frameObjectID  %></p>
+      <p>FrameObjectNumber: <%= text_field_tag :frameObjectNumber, @frameObjectNumber %></p>
+      <%= hidden_field_tag(:objectNumber, @objectNumber) %>
+      <%= hidden_field_tag(:objectID, @objectID) %>
+      <p><%= submit_tag("Remap Frame",data: { confirm: "Are you sure you want to make this change?" }) %></p>
+    <% end %>
   <% end %>
 <% end %>
 <p><a href="/frames/index">Go back</a></p>
