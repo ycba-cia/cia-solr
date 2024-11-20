@@ -43,3 +43,8 @@
   <p>Output&nbsp;<%= text_field_tag(:output_name, nil, size: 50) %></p>
   <p><%= submit_tag("Add Mapping") %></p>
 <% end %>
+<p><b>Delete an entry (use original name)</b></p>
+<%= form_tag("/locnaf/delete1", method: "get") do  %>
+  <p>Input&nbsp;&nbsp;&nbsp;<%= text_field_tag(:input_name, nil, size: 50) %></p>
+  <p><%= submit_tag("Submit") %></p>
+<% end %>

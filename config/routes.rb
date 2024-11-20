@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get 'locnaf/listing', to: "locnaf#listing"
   get 'locnaf/lookup', to: "locnaf#lookup"
   get 'locnaf/confirm', to: "locnaf#confirm"
+  get 'locnaf/submit', to: "locnaf#submit"
+  get 'locnaf/delete1', to: "locnaf#delete1"
+  get 'locnaf/delete2', to: "locnaf#delete2"
 
   #ERJ 9/11/2024 added devise_for
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

@@ -1,0 +1,11 @@
+<% if @input_name.nil? %>
+  <p><b><%= @pinput_name %></b> Not found.</p>
+<% else %>
+  <p><b>You are about to delete:</b></p>
+  <%= form_tag("/locnaf/delete2", method: "get") do  %>
+    <p>Input&nbsp;&nbsp;&nbsp;<%= text_field_tag(:input_name, @input_name.to_s, size: 50, readonly: true) %></p>
+    <p>Output&nbsp;<%= text_field_tag(:output_name, @output_name.to_s, size: 50, readonly: true) %></p>
+    <p><%= submit_tag("Delete",data: { confirm: "Are you sure you want to delete?" }) %></p>
+  <% end %>
+<% end %>
+<p><a href="/locnaf/index">Go back</a></p>

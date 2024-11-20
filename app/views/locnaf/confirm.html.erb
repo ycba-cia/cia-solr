@@ -1,7 +1,7 @@
 <p><b>You are about to submit:</b></p>
 <%= form_tag("/locnaf/submit", method: "get") do  %>
-  <p>Input&nbsp;&nbsp;&nbsp;<%= text_field_tag(:input_name, @input_name.to_s, size: 50, disabled: true) %></p>
-  <p>Output&nbsp;<%= text_field_tag(:output_name, @output_name.to_s, size: 50, disabled: true) %></p>
+  <p>Input&nbsp;&nbsp;&nbsp;<%= text_field_tag(:input_name, @input_name.to_s, size: 50, readonly: true) %></p>
+  <p>Output&nbsp;<%= text_field_tag(:output_name, @output_name.to_s, size: 50, readonly: true) %></p>
   <p><%= submit_tag("Save Mapping") %></p>
 <% end %>
 <p><a href="/locnaf/index">Go back</a></p>
