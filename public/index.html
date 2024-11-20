@@ -1,0 +1,37 @@
+<html>
+<head>
+    <style>
+        body {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        a.button {
+            padding: 1px 6px;
+            border: 1px outset buttonborder;
+            border-radius: 3px;
+            color: buttontext;
+            background-color: buttonface;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<!--implemented in javascript just for kicks-->
+<body>
+<div>
+    <h3>YCBA Collections Management - Choose application:</h3>
+    <p id="index-delete"></p>
+    <p id="frames"></p>
+    <p id="locnaf"></p>
+    <!--<p><a href="https://secure.its.yale.edu/cas/logout" class="button">Log out of CAS</a></p>-->
+</div>
+<script>
+    let indexdelete = "<a href=\"home/index\" class=\"button\">Delete from Online Collections</a>"
+    let frames = "<a href=\"frames/index\" class=\"button\">Object/Frames Mapping</a>"
+    let locnaf = "<a href=\"locnaf/index\" class=\"button\">Artists Name Mapping</a>"
+
+    document.getElementById("index-delete").innerHTML = indexdelete
+    document.getElementById("frames").innerHTML = frames;
+    document.getElementById("locnaf").innerHTML = locnaf;
+</script>
+</body>
+</html>
