@@ -160,7 +160,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.8)
+    nokogiri (1.18.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     omniauth (2.1.2)
@@ -306,7 +306,7 @@ DEPENDENCIES
   kaminari
   listen (>= 3.0.5, < 3.2)
   mysql2 (~> 0.5.3)
-  nokogiri (~> 1.16, >= 1.16.7)
+  nokogiri (~> 1.18)
   omniauth (~> 2.1)
   omniauth-cas (~> 3.0.0)
   omniauth-rails_csrf_protection (~> 1.0.2)
