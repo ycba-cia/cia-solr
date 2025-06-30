@@ -91,4 +91,6 @@ gem 'sorted_set'
 
 gem 'kaminari'
 
+gem 'tiny_tds', '1.3.0'
+
 #gem 'bundler', '2.5.18'

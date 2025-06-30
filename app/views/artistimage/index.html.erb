@@ -1,0 +1,49 @@
+<h1>YCBA - Associate hero image with artist record</h1>
+<p>You are logged in as: <b><%= current_user.uid %></b></p>
+
+<br class="container-fluid">
+  <div class="row">
+    <!--<form action="/action_page.php" id="carform">-->
+    <select name="nametype" form="lookup">
+      <option value="constituentID">ConstituentID</option>
+      <option value="DisplayName">DisplayName</option>
+      <option value="FirstName">FirstName</option>
+      <option value="LastName">LastName</option>
+    </select>
+    <input type="text" name="name" size="75" onkeydown="if (event.keyCode==13) getartistsdata()">
+    <!--TODO start here with javascript-->
+    <input type="submit" value="lookup" onclick="getartistsdata()">
+    <!--</form>-->
+  </div>
+  </br>
+  <form accept-charset="UTF-8" action="/artistimage/confirm" method="get">
+    <div class="row">
+      <label class="labels">ID</label><input type="text" name="id" size="20">
+    </div>
+    <div class="row">
+      <label class="labels">Image:</label><input type="text" name="image" size="150">
+    </div>
+    <div class="row">
+      <label class="labels">Thumb:</label><input type="text" name="thumbnail" size="150">
+      <input type="submit" value="update image">
+    </div>
+  </form>
+
+  <div class="row">
+    <div class=col-xs-8 align-left id="table-scroll">
+      <table class="sortable table table-striped">
+        <thead>
+        <tr>
+          <th style="width: 30%">ID</th>
+          <th style="width: 35%">DisplayName</th>
+          <th style="width: 35%">DisplayDate</th>
+        </tr>
+        </thead>
+        <tbody id="artistsresults"/>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+<!--select ConstituentID, DisplayName from Constituents where displayName like 'Edmund%';-->
+<!--FirstName,LastName,DisplayName-->

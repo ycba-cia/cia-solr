@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   get 'locnaf/delete1', to: "locnaf#delete1"
   get 'locnaf/delete2', to: "locnaf#delete2"
 
+  get 'artistimage/index'
+  get 'artistimage/getconstituentdata', to: 'artistimage#getconstituentdata'
+  get 'artistimage/confirm', to: 'artistimage#confirm'
+
   #ERJ 9/11/2024 added devise_for
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   get '/unauth', :to => redirect('/unauth.html'), as: :unauth
