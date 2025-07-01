@@ -79,6 +79,12 @@ class ArtistimageController < ApplicationController
     @image = params["image"]
     @thumbnail = params["thumbnail"]
     @conid, @displayName,@displayDate = getconstituent_by_id(@id)
+    a = ArtistHeroImages.where(artistid: @id)
+    @length = a.length
+    if @length == 1
+      @currimage = a[0]["image"]
+      @currthumbnail = a[0]["thumbnail"]
+    end
   end
 
 end

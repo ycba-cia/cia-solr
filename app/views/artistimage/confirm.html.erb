@@ -1,19 +1,30 @@
 <h1>YCBA - Associate hero image with artist record</h1>
 <p>You are logged in as: <b><%= current_user.uid %></b></p>
-<p>You've selected the following artist:</p>
+<p>You've selected the following record:</p>
 <p><label class="labels">ID:</label><%= @id %></p>
 <p><label class="labels">DisplayName:</label><%= @displayName %></p>
 <p><label class="labels">DisplayDate:</label><%= @displayDate %></p>
 
+<% if @length > 0 %>
+<div class="row">
+  <p><label class="labels">Current Image:</label><%= @currimage %></p>
+  <img id="heroimagecurr" src="<%= @currimage %>" onerror="this.onerror=null;" alt="no current image" style="max-width: 50%; height: auto;>
+    </div>
+    <div class="row">
+  <p><label class="labels">Current Thumbnail:</label><%= @currthumbnail %></p>
+  <img id="herothumbcurr" src="<%= @currthumbnail %>" onerror="this.onerror=null;" alt="no current thumbnail" style="max-width: 50%; height: auto;>
+</div>
+<% end %>
 
 <div class="row">
-  <p><label class="labels">Image:</label><%= @image %></p>
+  <p><label class="labels">Proposed Image:</label><%= @image %></p>
   <img id="heroimage" src="<%= @image %>" onerror="this.onerror=null;" alt="image not found, go back" style="max-width: 50%; height: auto;>
 </div>
 <div class="row">
-  <p><label class="labels">Thumbnail:</label><%= @thumbnail %></p>
+  <p><label class="labels">Proposed Thumbnail:</label><%= @thumbnail %></p>
   <img id="herothumb" src="<%= @thumbnail %>" onerror="this.onerror=null;" alt="thumbnail not found, go back" style="max-width: 50%; height: auto;>
 </div>
+
 <div class="row">
   <form accept-charset="UTF-8" action="/artistimage/index" method="get">
     <input class="submitbuttons" name="back" type="submit" value="Back"/>
