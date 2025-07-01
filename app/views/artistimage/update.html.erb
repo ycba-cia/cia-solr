@@ -1,0 +1,11 @@
+<h1>YCBA - Associate hero image with artist record</h1>
+<p>You are logged in as: <b><%= current_user.uid %></b></p>
+<p>You have saved:</p>
+<div class="row"><label class="labels">ArtistID:</label><%= @saved["artistid"]%></div>
+<div class="row"><label class="labels">Image:</label><%= @saved["image"] %></div>
+<div class="row"><label class="labels">Thumbnail:</label><%= @saved["thumbnail"] %></div>
+<div class="row">
+  <form accept-charset="UTF-8" action="/artistimage/index" method="get">
+    <input class="submitbuttons" name="back" type="submit" value="Back"/>
+  </form>
+</div>

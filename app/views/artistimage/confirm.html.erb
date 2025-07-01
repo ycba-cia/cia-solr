@@ -31,6 +31,9 @@
   </form>
   </br>
   <form accept-charset="UTF-8" action="/artistimage/update" method="get">
-    <input class="submitbuttons" name="update" type="submit" value="Update" style="color:red;" onclick="return confirm('Are you sure you want to update?');"/>
+    <input class="submitbuttons" name="update" type="submit" value="Save" style="color:red;" onclick="return confirm('Are you sure you want to save?');"/>
+    <input type="hidden" name="id" value="<%= @id %>">
+    <input type="hidden" name="image" value="<%= @image %>">
+    <input type="hidden" name="thumbnail" value="<%= @thumbnail %>">
   </form>
 </div>

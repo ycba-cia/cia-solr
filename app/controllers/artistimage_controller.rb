@@ -1,3 +1,4 @@
+require 'pp'
 class ArtistimageController < ApplicationController
 
   #before_action :solr_connect, only: [:confirm,:submit]
@@ -85,6 +86,30 @@ class ArtistimageController < ApplicationController
       @currimage = a[0]["image"]
       @currthumbnail = a[0]["thumbnail"]
     end
+  end
+
+  def update
+    @id = params["id"]
+    @image = params["image"]
+    @thumbnail = params["thumbnail"]
+    a = ArtistHeroImages.where(artistid: @id)
+    if a.length == 1
+      a = a.first
+      a.artistid = @id
+      a.image = @image
+      a.thumbnail = @thumbnail
+      a.updated_at = DateTime.now
+      a.save!
+    else
+      a = ArtistHeroImages.new
+      a.artistid = @id
+      a.image = @image
+      a.thumbnail = @thumbnail
+      a.created_at = DateTime.now
+      a.updated_at = DateTime.now
+      a.save!
+    end
+    @saved = a
   end
 
 end
