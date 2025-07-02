@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'artistimage/index'
   get 'artistimage/getconstituentdata', to: 'artistimage#getconstituentdata'
   get 'artistimage/confirm', to: 'artistimage#confirm'
+  get 'artistimage/update', to: 'artistimage#update'
 
   #ERJ 9/11/2024 added devise_for
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
