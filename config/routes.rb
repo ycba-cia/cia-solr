@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'frames/confirm', to: "frames#confirm"
   get 'frames/submit', to: "frames#submit"
   get 'frames/new', to: "frames#new"
+  get 'frames/delete', to: "frames#delete"
 
   get 'locnaf/index'
   get 'locnaf/listing', to: "locnaf#listing"

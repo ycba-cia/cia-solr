@@ -70,6 +70,15 @@ class FramesController < ApplicationController
     end
   end
 
+  def delete
+    #if params["solr_id"].present?
+    @objectID = params["objectID"]
+    @objectNumber = params["objectNumber"]
+    @frameObjectID = params["frameObjectID"]
+    @frameObjectNumber = params["frameObjectNumber"]
+    Frame.where(objectID: @objectID).delete_all
+  end
+  
   def new
     #if params["solr_id"].present?
     objectID = params["objectID"]

@@ -29,6 +29,14 @@
       <%= hidden_field_tag(:objectID, @objectID) %>
       <p><%= submit_tag("Remap Frame",data: { confirm: "Are you sure you want to make this change?" }) %></p>
     <% end %>
+    <h3>Or delete this mapping entirely:</h3>
+    <%= form_tag("/frames/delete", method: "get") do  %>
+      <%= hidden_field_tag(:objectID, @objectID) %>
+      <%= hidden_field_tag(:objectNumber, @objectNumber) %>
+      <%= hidden_field_tag(:frameObjectID, @frameObjectID) %>
+      <%= hidden_field_tag(:frameObjectNumber, @frameObjectNumber) %>
+      <p><%= submit_tag("Delete Mapping",data: { confirm: "Are you sure you want to make this change?" }) %></p>
+    <% end %>
   <% end %>
 <% end %>
 <p><a href="/frames/index">Go back</a></p>
