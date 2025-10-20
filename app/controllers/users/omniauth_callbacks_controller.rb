@@ -11,7 +11,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       puts "authenticated!"
       #session["netid"] = auth["uid"] #not needed, just display current_user.uid in view
       sign_in @user, event: :authentication
-      redirect_to home_index_path
+      #redirect_to home_index_path #bad, always returns to home
+      #redirect_to '/index.html' #not good always return to public page
+      original_url = session.delete(:user_return_to) || root_path #good uses session to redirect
+      redirect_to original_url
+
       #set_flash_message(:notice, :success, kind: "CAS") if is_navigational_format?
     else
       puts "user #{auth['uid']} not found for #{auth['provider']}"
