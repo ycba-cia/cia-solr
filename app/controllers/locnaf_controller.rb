@@ -25,7 +25,12 @@ class LocnafController < ApplicationController
   def submit
     input_name = params["input_name"]
     output_name = params["output_name"]
-    l = Locnaf.create(input_name: input_name, output_name: output_name)
+    begin
+      l = Locnaf.create(input_name: input_name, output_name: output_name)
+    rescue => e
+      @error = "An error occurred #{e.message}"
+      return
+    end  
     @input_name = l.input_name
     @output_name = l.output_name
   end

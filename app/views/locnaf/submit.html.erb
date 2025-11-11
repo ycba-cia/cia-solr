@@ -1,3 +1,7 @@
+
+<% if @error %>
+  <p><b><%= @error %></b></p>
+<% else %>
 <p><b>You have added the following mapping:</b></p>
 <div class="span1">
   <table class="locnaf">
@@ -13,5 +17,6 @@
 </div>
 <p>You may want to lookup it up or check it out in listings.</p>
 <p>If you have made a mistake go back to home page and in the delete section enter <b><%= @input_name %></b></p>
+<% end %>
 <p><a href="/locnaf/listing">Listings</a></p>
 <p><a href="/locnaf/index">Go back</a></p>
