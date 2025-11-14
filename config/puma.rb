@@ -16,7 +16,7 @@ port        ENV.fetch("PORT") { 3001 }
 #
 environment ENV.fetch("RAILS_ENV") { "production" }
 
-daemonize
+daemonize false
 pidfile 'log/puma/puma.pid'
 stdout_redirect 'log/puma/stdout', 'log/puma/stderr', true
 
