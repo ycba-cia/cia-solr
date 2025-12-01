@@ -9,9 +9,12 @@ solr_url1 = y["url"]
 solr_conn1 = RSolr.connect :url => solr_url1
 #solr_conn2 = RSolr.connect :url => solr_url2
 
-#uncomment to delete
-#mode = "delete"
+#configuration variables
+output = ""
 output = "list"
+mode = ""
+#mode = "delete"
+
 
 fq = 'collection_ss:"Reference Library" && timestamp_dt:[* TO NOW-1DAY]'
 #fq = 'collection_ss:"Rare Books and Manuscripts" && timestamp_dt:[* TO NOW-1DAY]'
@@ -42,7 +45,7 @@ else
   end
 end
 
-exit
+#exit
 
 docs.each { |doc|
   id = doc["id"]
