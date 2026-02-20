@@ -72,7 +72,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rsolr'
 
 #gem 'nokogiri', '~> 1.14.3'
-gem 'nokogiri', '~> 1.18', force_ruby_platform: true
+gem 'nokogiri', '~> 1.19', force_ruby_platform: true
 
 gem "rack", ">= 2.2.3"
 
