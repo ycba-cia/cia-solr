@@ -36,7 +36,7 @@ class ArtistimageController < ApplicationController
     YAML.load(File.open(env_file)).each do |key, value|
       db[key.to_s] = value
     end if File.exist?(env_file)
-    tds = TinyTds::Client.new(:username => db["tmsuser"],:password => db["tmspw"],:host => db["tmshost"],:database => db["databaseName"])
+    tds = TinyTds::Client.new(:username => db["tmsuser"],:password => Rails.application.credentials[:TMSPW],:host => db["tmshost"],:database => db["databaseName"])
     r = tds.execute("SET TEXTSIZE -1")
     return tds
   end
