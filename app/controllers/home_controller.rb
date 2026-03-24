@@ -10,20 +10,19 @@ class HomeController < ApplicationController
   def solr_connect
     y = YAML.load_file("#{Rails.root.to_s}/config/solr.yml")
     @solrs = Array.new
-    @solr = RSolr.connect :url => y["url"]
-    @solr2 = RSolr.connect :url => y["url2"]
+    @solr = RSolr.connect :url => "https://ycba_admin:" + Rails.application.credentials[:CIAINDEX5] + "@ciaindex5.britishart.yale.edu/solr/ycba_alma1"
+    @solr2 = RSolr.connect :url => "https://ycba_admin:" + Rails.application.credentials[:CIAINDEX5] + "@ciaindex5.britishart.yale.edu/solr/ycba_alma2"
     @solrs.push(@solr)
     @solrs.push(@solr2)
     @config_code = y["code"]
 
     as_hostname = y["as_hostname"]
     as_username = y["as_username"]
-    as_password = y["as_password"]
     as_databasename = y["as_databasename"]
     sslca = y['sslca']
     sslca_path = "#{Rails.root.to_s}/#{sslca}"
     if @as_client.nil? or @as_client.closed?
-      @as_client = Mysql2::Client.new(:host=>as_hostname,:username=>as_username,:password=>as_password,:database=>as_databasename,:sslca=>sslca_path)
+      @as_client = Mysql2::Client.new(:host=>as_hostname,:username=>as_username,:password=>Rails.application.credentials[:ASPW],:database=>as_databasename,:sslca=>sslca_path)
     end
     puts "activitystream1 ping:#{@as_client.ping}"
 
