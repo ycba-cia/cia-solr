@@ -17,7 +17,7 @@ development:
     adapter: mysql2
     encoding: utf8
     username: collectionsuser
-    password: <%= ENV.fetch("DB1PW") %>
+    password: <%= Rails.application.credentials[:DB1PW] %>
     host: ycba-collections-db.ctsmybupmova.us-east-1.rds.amazonaws.com
     database: ycba_collections_db
     port: 3306
@@ -38,8 +38,8 @@ production:
     adapter: mysql2
     encoding: utf8
     username: collectionsuser
-    password: <%= ENV.fetch("DB1PW") %>
+    password: <%= Rails.application.credentials[:DB1PW] %>
     host: ycba-collections-db.ctsmybupmova.us-east-1.rds.amazonaws.com
     database: ycba_collections_db
     port: 3306
-    sslca: /Users/ermadmix/Documents/RubymineProjects/cia-solr/config/global-bundle.pem
+    sslca: /app/prod-cia-solr/cia-solr/config/global-bundle.pem
