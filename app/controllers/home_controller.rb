@@ -8,18 +8,18 @@ class HomeController < ApplicationController
   end  
 
   def solr_connect
-    y = YAML.load_file("#{Rails.root.to_s}/config/solr.yml")
+    #y = YAML.load_file("#{Rails.root.to_s}/config/solr.yml")
     @solrs = Array.new
     @solr = RSolr.connect :url => "https://ycba_admin:" + Rails.application.credentials[:CIAINDEX5] + "@ciaindex5.britishart.yale.edu/solr/ycba_alma1"
     @solr2 = RSolr.connect :url => "https://ycba_admin:" + Rails.application.credentials[:CIAINDEX5] + "@ciaindex5.britishart.yale.edu/solr/ycba_alma2"
     @solrs.push(@solr)
     @solrs.push(@solr2)
-    @config_code = y["code"]
+    #@config_code = y["code"]
 
-    as_hostname = y["as_hostname"]
-    as_username = y["as_username"]
-    as_databasename = y["as_databasename"]
-    sslca = y['sslca']
+    as_hostname = "activitystream1-encrypt.c9l6yvytyb6p.us-east-1.rds.amazonaws.com"
+    as_username = "asuser"
+    as_databasename = "as1"
+    sslca = "global-bundle.pem"
     sslca_path = "#{Rails.root.to_s}/#{sslca}"
     if @as_client.nil? or @as_client.closed?
       @as_client = Mysql2::Client.new(:host=>as_hostname,:username=>as_username,:password=>Rails.application.credentials[:ASPW],:database=>as_databasename,:sslca=>sslca_path)

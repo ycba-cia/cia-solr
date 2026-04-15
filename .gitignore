@@ -35,3 +35,6 @@
 /config/credentials/development.key
 
 /config/credentials/production.key
+
+# ignore heartbeat monitor file
+/lastcheck.txt
