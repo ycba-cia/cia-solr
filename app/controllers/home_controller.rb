@@ -50,13 +50,20 @@ class HomeController < ApplicationController
         @return += "<p><u>Index "+ii.to_s+"</u><p>"
         lookup = solr.select :params => { :fq => "id:\"#{@id}\"" }
         if lookup["response"]["numFound"] == 1
-          title = ""
-          author = ""
           @found = true
-          title = lookup["response"]["docs"][0]["title_ss"][0] if lookup["response"]["docs"][0]["title_ss"]
-          author = lookup["response"]["docs"][0]["author_ss"][0] if lookup["response"]["docs"][0]["author_ss"]
-          @return += "<p><b>Title:</b>"+title+"</p>"
-          @return += "<p><b>Author:</b>"+author+"</p>"
+          id = lookup["response"]["docs"][0]["id"]
+          if id.start_with?("artists")
+            locnaf = ""
+            locnaf = lookup["response"]["docs"][0]["locnaf_ss"][0] if lookup["response"]["docs"][0]["locnaf_ss"]
+            @return += "<p><b>Locnaf:</b>"+locnaf+"</p>"
+          else  
+            title = ""
+            author = ""
+            title = lookup["response"]["docs"][0]["title_ss"][0] if lookup["response"]["docs"][0]["title_ss"]
+            author = lookup["response"]["docs"][0]["author_ss"][0] if lookup["response"]["docs"][0]["author_ss"]
+            @return += "<p><b>Title:</b>"+title+"</p>"
+            @return += "<p><b>Author:</b>"+author+"</p>"
+          end  
         else
           @return += "<p>ID <b>#{@id}</b> not found</p>"
         end
