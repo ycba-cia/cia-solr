@@ -107,7 +107,7 @@ GEM
       responders
       warden (~> 1.2.3)
     drb (2.2.3)
-    erb (6.0.3)
+    erb (6.0.4)
     erubi (1.13.1)
     execjs (2.10.0)
     faraday (2.14.1)
