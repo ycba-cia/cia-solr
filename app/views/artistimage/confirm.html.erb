@@ -6,19 +6,27 @@
 <p><label class="labels">DisplayDate:</label><%= @displayDate %></p>
 
 <% if @length > 0 %>
-<div class="row">
-  <p><label class="labels">Current Image:</label><%= @currimage %></p>
-  <img id="heroimagecurr" src="<%= @currimage %>" onerror="this.onerror=null;" alt="no current image" style="max-width: 50%; height: auto;>
-    </div>
-    <div class="row">
-  <p><label class="labels">Current Thumbnail:</label><%= @currthumbnail %></p>
-  <img id="herothumbcurr" src="<%= @currthumbnail %>" onerror="this.onerror=null;" alt="no current thumbnail" style="max-width: 50%; height: auto;>
-</div>
+  <div class="row">
+    <p><label class="labels">Current Image:</label><%= @currimage %></p>
+    <img id="heroimagecurr" src="<%= @currimage %>" onerror="this.onerror=null;" alt="no current image" style="max-width: 50%; height: auto;>
+  </div>
+  <div class="row">
+    <p><label class="labels">Current MobileImage:</label><%= @currmobileimage %></p>
+    <img id="herothumbcurr" src="<%= @currmobileimage %>" onerror="this.onerror=null;" alt="no current mobileimage" style="max-width: 50%; height: auto;>
+  </div>
+  <div class="row">
+    <p><label class="labels">Current Thumbnail:</label><%= @currthumbnail %></p>
+    <img id="herothumbcurr" src="<%= @currthumbnail %>" onerror="this.onerror=null;" alt="no current thumbnail" style="max-width: 50%; height: auto;>
+  </div>
 <% end %>
 
 <div class="row">
   <p><label class="labels">Proposed Image:</label><%= @image %></p>
   <img id="heroimage" src="<%= @image %>" onerror="this.onerror=null;" alt="image not found, go back" style="max-width: 50%; height: auto;>
+</div>
+<div class="row">
+  <p><label class="labels">Proposed MobileImage:</label><%= @mobileimage %></p>
+  <img id="heromobileimage" src="<%= @image %>" onerror="this.onerror=null;" alt="mobileimage not found, go back" style="max-width: 50%; height: auto;>
 </div>
 <div class="row">
   <p><label class="labels">Proposed Thumbnail:</label><%= @thumbnail %></p>
@@ -34,6 +42,7 @@
     <input class="submitbuttons" name="update" type="submit" value="Save" style="color:red;" onclick="return confirm('Are you sure you want to save?');"/>
     <input type="hidden" name="id" value="<%= @id %>">
     <input type="hidden" name="image" value="<%= @image %>">
+    <input type="hidden" name="mobileimage" value="<%= @mobileimage %>">
     <input type="hidden" name="thumbnail" value="<%= @thumbnail %>">
   </form>
 </div>

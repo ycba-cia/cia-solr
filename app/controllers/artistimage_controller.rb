@@ -55,6 +55,17 @@ class ArtistimageController < ApplicationController
     end
     s.cancel
     client.close
+
+    if rows.length > 0
+      a = ArtistHeroImages.where(artistid: rows[0]["ConstituentID"])
+      if a.length == 1
+        a = a.first
+        rows[0]["image"] = a.image
+        rows[0]["mobileimage"] = a.mobileimage
+        rows[0]["thumbnail"] = a.thumbnail
+      end
+    end
+    puts JSON(rows)
     render :json => JSON(rows)
   end
 
@@ -78,12 +89,14 @@ class ArtistimageController < ApplicationController
   def confirm
     @id = params["id"]
     @image = params["image"]
+    @mobileimage = params["mobileimage"]
     @thumbnail = params["thumbnail"]
     @conid, @displayName,@displayDate = getconstituent_by_id(@id)
     a = ArtistHeroImages.where(artistid: @id)
     @length = a.length
     if @length == 1
       @currimage = a[0]["image"]
+      @currmobileimage = a[0]["mobileimage"]
       @currthumbnail = a[0]["thumbnail"]
     end
   end
@@ -91,12 +104,14 @@ class ArtistimageController < ApplicationController
   def update
     @id = params["id"]
     @image = params["image"]
+    @mobileimage = params["mobileimage"]
     @thumbnail = params["thumbnail"]
     a = ArtistHeroImages.where(artistid: @id)
     if a.length == 1
       a = a.first
       a.artistid = @id
       a.image = @image
+      a.mobileimage = @mobileimage
       a.thumbnail = @thumbnail
       a.updated_at = DateTime.now
       a.save!
@@ -104,6 +119,7 @@ class ArtistimageController < ApplicationController
       a = ArtistHeroImages.new
       a.artistid = @id
       a.image = @image
+      a.mobileimage = @mobileimage
       a.thumbnail = @thumbnail
       a.created_at = DateTime.now
       a.updated_at = DateTime.now

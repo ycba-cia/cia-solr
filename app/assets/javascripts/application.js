@@ -28,11 +28,17 @@ function getartistsdata() {
             var artists = obj;
             console.log("artists:"+ artists);
             for (i = 0; i < artists.length; i++) {
+                document.getElementById('id1').value = artists[i]["ConstituentID"];
+                document.getElementById('image').value = artists[i]["image"];
+                document.getElementById('mobileimage').value = artists[i]["mobileimage"];
+                document.getElementById('thumbnail').value = artists[i]["thumbnail"];
+
                 body.innerHTML += "<tr>" +
                     "<td>" + artists[i]["ConstituentID"] + "</td>" +
                     "<td>" + artists[i]["DisplayName"] + "</td>" +
-                    "<td>" + artists[i]["DisplayDate"] + "</td>"
+                    "<td>" + artists[i]["DisplayDate"] + "</td>";
             }
+
             /*
                 if (images[i]["del"] === undefined || images[i]["del"] == "0") {
                     body.innerHTML += "<tr>" +
