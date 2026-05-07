@@ -28,10 +28,10 @@ function getartistsdata() {
             var artists = obj;
             console.log("artists:"+ artists);
             for (i = 0; i < artists.length; i++) {
-                document.getElementById('id1').value = artists[i]["ConstituentID"];
-                document.getElementById('image').value = artists[i]["image"];
-                document.getElementById('mobileimage').value = artists[i]["mobileimage"];
-                document.getElementById('thumbnail').value = artists[i]["thumbnail"];
+                document.getElementById('id1').value = artists[0]["ConstituentID"];
+                document.getElementById('image').value = artists[0]["image"];
+                document.getElementById('mobileimage').value = artists[0]["mobileimage"];
+                document.getElementById('thumbnail').value = artists[0]["thumbnail"];
 
                 body.innerHTML += "<tr>" +
                     "<td>" + artists[i]["ConstituentID"] + "</td>" +
