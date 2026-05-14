@@ -49,7 +49,10 @@ class HomeController < ApplicationController
   end
 
   def delete_checked
-    Rails.logger.info "deleted id: #{params[:id]}"
+    #@solr.delete_by_id params[:id]
+    #@solr.commit
+    #@solr2.delete_by_id params[:id]
+    #@solr2.commit
     flash[:delete_notice] = "deleted id: #{params[:id]}"
     return_to = CGI.unescapeHTML(params[:return_to].presence || '/home/index')
     redirect_to return_to

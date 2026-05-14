@@ -68,14 +68,35 @@
       </tbody>
     </table>
   </div>
+  <div id="deleteModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:1000;">
+    <div style="background:#fff; margin:15% auto; padding:20px; width:400px; border:1px solid #ccc;">
+      <p id="deleteModalMsg" style="color:red; font-weight:bold;"></p>
+      <button onclick="doDelete()">OK</button>
+      <button onclick="cancelDelete()">Cancel</button>
+    </div>
+  </div>
   <script>
     var returnUrl = "<%= j request.fullpath %>";
+    var pendingDeleteUrl = null;
+    var pendingCheckbox = null;
+
     function confirmDeleteChecked(checkbox, id) {
-      if (confirm("Do you really want to delete this: " + id + "?")) {
-        window.location.href = '/home/delete_checked?id=' + encodeURIComponent(id) + '&return_to=' + encodeURIComponent(returnUrl);
-      } else {
-        checkbox.checked = false;
-      }
+      pendingDeleteUrl = '/home/delete_checked?id=' + encodeURIComponent(id) + '&return_to=' + encodeURIComponent(returnUrl);
+      pendingCheckbox = checkbox;
+      document.getElementById('deleteModalMsg').textContent = 'Do you really want to delete this: ' + id + '?';
+      document.getElementById('deleteModal').style.display = 'block';
+    }
+
+    function doDelete() {
+      document.getElementById('deleteModal').style.display = 'none';
+      window.location.href = pendingDeleteUrl;
+    }
+
+    function cancelDelete() {
+      document.getElementById('deleteModal').style.display = 'none';
+      if (pendingCheckbox) pendingCheckbox.checked = false;
+      pendingCheckbox = null;
+      pendingDeleteUrl = null;
     }
   </script>
 <% end %>
