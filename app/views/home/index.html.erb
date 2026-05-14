@@ -10,3 +10,55 @@
 <% end %>
 </br>
 <%#= link_to "Logout", destroy_user_session_path, :method => :delete %>
+
+<hr>
+<h2>Lookup outdated records</h2>
+
+<%= form_tag("/home/delete_lookup", method: "get") do %>
+  <%= hidden_field_tag :yesterday, @yesterday %>
+  <%= label_tag :collection, "Collection:" %>
+  <%= select_tag :collection, options_for_select([
+    "Prints and Drawings",
+    "Reference Library",
+    "Rare Books and Manuscripts",
+    "Archives",
+    "Paintings and Sculpture",
+    "Frames",
+    "Artists"
+  ], params[:collection]) %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if @docs.present? %>
+  <p><b><%= @docs.size %> record(s)</b> in <em><%= @collection %></em> with timestamp before <%= @yesterday %></p>
+  <div style="max-height: 450px; overflow-y: auto;">
+    <table border="1" cellpadding="4" cellspacing="0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <% if @collection == "Artists" %>
+            <th>LOCNAF</th>
+          <% else %>
+            <th>Title</th>
+            <th>Author</th>
+          <% end %>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @docs.each do |doc| %>
+          <tr>
+            <td><%= doc["id"] %></td>
+            <% if @collection == "Artists" %>
+              <td><%= Array(doc["locnaf_ss"]).first %></td>
+            <% else %>
+              <td><%= Array(doc["title_ss"]).first %></td>
+              <td><%= Array(doc["author_ss"]).first %></td>
+            <% end %>
+            <td><%= doc["timestamp_dt"] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

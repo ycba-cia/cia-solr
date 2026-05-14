@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/confirm', to: "home#confirm"
   get 'home/submit', to: "home#submit"
+  get 'home/delete_lookup', to: "home#delete_lookup"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'frames/index'

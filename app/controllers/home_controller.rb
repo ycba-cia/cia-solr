@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
-  before_action :solr_connect, only: [:confirm,:submit]
-  after_action :solr_close, only: [:confirm,:submit]
+  before_action :solr_connect, only: [:confirm, :submit, :delete_lookup]
+  after_action :solr_close, only: [:confirm, :submit, :delete_lookup]
 
   def solr_close
     @as_client.close
@@ -29,6 +29,23 @@ class HomeController < ApplicationController
   end
 
   def index
+    @yesterday = (Date.today - 1).strftime("%Y-%m-%dT00:00:00.000Z")
+  end
+
+  def delete_lookup
+    @yesterday  = params[:yesterday]
+    @collection = params[:collection]
+
+    fl = @collection == "Artists" ? "id,locnaf_ss,timestamp_dt" : "id,title_ss,author_ss,timestamp_dt"
+
+    result = @solr2.select :params => {
+      :fq   => "collection_ss:\"#{@collection}\" AND timestamp_dt:[* TO #{@yesterday}]",
+      :fl   => fl,
+      :rows => 1000
+    }
+    @docs = result["response"]["docs"]
+
+    render :index
   end
 
   def confirm
