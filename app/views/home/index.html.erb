@@ -40,7 +40,7 @@
     <table class="sortable" border="1" cellpadding="4" cellspacing="0">
       <thead>
         <tr>
-          <th class="unsortable"></th>
+          <th class="unsortable">Delete</th>
           <th>ID</th>
           <% if @collection == "Artists" %>
             <th>LOCNAF</th>
@@ -69,9 +69,10 @@
     </table>
   </div>
   <script>
+    var returnUrl = "<%= j request.fullpath %>";
     function confirmDeleteChecked(checkbox, id) {
       if (confirm("Do you really want to delete this: " + id + "?")) {
-        window.location.href = '/home/delete_checked?id=' + encodeURIComponent(id);
+        window.location.href = '/home/delete_checked?id=' + encodeURIComponent(id) + '&return_to=' + encodeURIComponent(returnUrl);
       } else {
         checkbox.checked = false;
       }

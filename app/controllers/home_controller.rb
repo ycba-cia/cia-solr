@@ -51,7 +51,8 @@ class HomeController < ApplicationController
   def delete_checked
     Rails.logger.info "deleted id: #{params[:id]}"
     flash[:delete_notice] = "deleted id: #{params[:id]}"
-    redirect_to '/home/index'
+    return_to = CGI.unescapeHTML(params[:return_to].presence || '/home/index')
+    redirect_to return_to
   end
 
   def confirm
