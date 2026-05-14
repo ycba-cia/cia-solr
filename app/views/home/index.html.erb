@@ -1,3 +1,6 @@
+<% if flash[:delete_notice] %>
+  <script>alert("<%= j flash[:delete_notice] %>");</script>
+<% end %>
 <h1>YCBA - Remove record from catalog</h1>
 <p>You are logged in as: <b><%= current_user.uid %></b></p>
 
@@ -12,7 +15,7 @@
 <%#= link_to "Logout", destroy_user_session_path, :method => :delete %>
 
 <hr>
-<h2>Lookup outdated records</h2>
+<h2>Check outdated records</h2>
 
 <%= form_tag("/home/delete_lookup", method: "get") do %>
   <%= hidden_field_tag :yesterday, @yesterday %>
@@ -29,12 +32,15 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<% if @docs.present? %>
+<% if !@collection.nil? %>
   <p><b><%= @docs.size %> record(s)</b> in <em><%= @collection %></em> with timestamp before <%= @yesterday %></p>
+<% end %>
+<% if @docs.present? %>
   <div style="max-height: 450px; overflow-y: auto;">
-    <table border="1" cellpadding="4" cellspacing="0">
+    <table class="sortable" border="1" cellpadding="4" cellspacing="0">
       <thead>
         <tr>
+          <th class="unsortable"></th>
           <th>ID</th>
           <% if @collection == "Artists" %>
             <th>LOCNAF</th>
@@ -48,6 +54,7 @@
       <tbody>
         <% @docs.each do |doc| %>
           <tr>
+            <td><input type="checkbox" onclick="confirmDeleteChecked(this, '<%= j doc["id"] %>')"></td>
             <td><%= doc["id"] %></td>
             <% if @collection == "Artists" %>
               <td><%= Array(doc["locnaf_ss"]).first %></td>
@@ -55,10 +62,19 @@
               <td><%= Array(doc["title_ss"]).first %></td>
               <td><%= Array(doc["author_ss"]).first %></td>
             <% end %>
-            <td><%= doc["timestamp_dt"] %></td>
+            <td style="white-space: nowrap;"><%= doc["timestamp_dt"]&.first(10) %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
+  <script>
+    function confirmDeleteChecked(checkbox, id) {
+      if (confirm("Do you really want to delete this: " + id + "?")) {
+        window.location.href = '/home/delete_checked?id=' + encodeURIComponent(id);
+      } else {
+        checkbox.checked = false;
+      }
+    }
+  </script>
 <% end %>

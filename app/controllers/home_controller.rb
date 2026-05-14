@@ -48,6 +48,12 @@ class HomeController < ApplicationController
     render :index
   end
 
+  def delete_checked
+    Rails.logger.info "deleted id: #{params[:id]}"
+    flash[:delete_notice] = "deleted id: #{params[:id]}"
+    redirect_to '/home/index'
+  end
+
   def confirm
     @id = params["id"]
     #@code = params["code"]
