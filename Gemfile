@@ -73,3 +73,5 @@ gem 'kaminari'
 gem 'tiny_tds', '3.2.1'
 
 #gem 'bundler', '2.5.18'
+
+gem 'image_processing', '~> 1.2'

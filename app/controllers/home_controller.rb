@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
-  before_action :solr_connect, only: [:confirm, :submit, :delete_lookup]
-  after_action :solr_close, only: [:confirm, :submit, :delete_lookup]
+  before_action :solr_connect, only: [:confirm, :submit, :delete_lookup, :delete_checked]
+  after_action :solr_close, only: [:confirm, :submit, :delete_lookup, :delete_checked]
 
   def solr_close
     @as_client.close
@@ -49,11 +49,24 @@ class HomeController < ApplicationController
   end
 
   def delete_checked
-    #@solr.delete_by_id params[:id]
-    #@solr.commit
-    #@solr2.delete_by_id params[:id]
-    #@solr2.commit
-    flash[:delete_notice] = "deleted id: #{params[:id]}"
+    as_row_data = getAS(params[:id])
+    if as_row_data == []
+      manifest = "No manifest to delete"
+    else
+      begin
+        manifest = as_row_data[0][2]
+        delete_to_actstream(as_row_data[0][0])
+      rescue => exception
+        flash[:delete_notice] = "#{exception.message} for #{params[:id]}. Report to IT/CIA"
+        return_to = CGI.unescapeHTML(params[:return_to].presence || '/home/index')
+        redirect_to return_to
+      end    
+    end  
+    @solr.delete_by_id params[:id]
+    @solr.commit
+    @solr2.delete_by_id params[:id]
+    @solr2.commit 
+    flash[:delete_notice] = "deleted id: #{params[:id]} manifest: #{manifest}"
     return_to = CGI.unescapeHTML(params[:return_to].presence || '/home/index')
     redirect_to return_to
   end

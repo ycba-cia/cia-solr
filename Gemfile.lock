@@ -133,6 +133,9 @@ GEM
       logger
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
+    image_processing (1.14.0)
+      mini_magick (>= 4.9.5, < 6)
+      ruby-vips (>= 2.0.17, < 3)
     io-console (0.8.2)
     irb (1.17.0)
       pp (>= 0.6.0)
@@ -171,6 +174,8 @@ GEM
       net-smtp
     marcel (1.1.0)
     matrix (0.4.3)
+    mini_magick (5.3.1)
+      logger
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
     minitest (6.0.4)
@@ -298,6 +303,9 @@ GEM
     rsolr (2.6.0)
       builder (>= 2.1.2)
       faraday (>= 0.9, < 3, != 2.0.0)
+    ruby-vips (2.3.0)
+      ffi (~> 1.12)
+      logger
     rubyzip (3.2.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -398,6 +406,7 @@ DEPENDENCIES
   capybara (>= 3.38)
   debug
   devise
+  image_processing (~> 1.2)
   jbuilder (~> 2.5)
   kaminari
   listen (>= 3.3)
