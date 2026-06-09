@@ -9,7 +9,7 @@ gem 'rails', '~> 8.1'
 gem 'sqlite3', '~> 2.0'
 
 # Use Puma as the app server
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 7.2'
 gem 'puma-daemon', require: false
 
 # Asset pipeline (keeping Sprockets for existing app; Rails 8 defaults to Propshaft)
