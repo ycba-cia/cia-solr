@@ -236,7 +236,7 @@ GEM
       date
       stringio
     public_suffix (7.0.5)
-    puma (6.6.1)
+    puma (7.2.1)
       nio4r (~> 2.0)
     puma-daemon (0.5.0)
       puma (>= 5.0)
@@ -415,7 +415,7 @@ DEPENDENCIES
   omniauth (~> 2.1)
   omniauth-cas (~> 3.0.0)
   omniauth-rails_csrf_protection (~> 2.0)
-  puma (~> 6.4)
+  puma (~> 7.2)
   puma-daemon
   rack (>= 2.2.3)
   rails (~> 8.1)
