@@ -1,0 +1,50 @@
+I want to make some changes to this rails app, adding a form to the home controller/view, that queries a solr index and displays the results.  How to best use claude to architect this change?
+
+collection_ss:"Prints and Drawings" && timestamp_dt:[* TO 2026-05-14T00:00:00.000Z]
+
+solr:
+use @solr and @solr2
+
+"params":{
+      "q":"*:*",
+      "defType":"lucene",
+      "indent":"true",
+      "q.op":"OR",
+      "fq":"collection_ss:\"Prints and Drawings\" && timestamp_dt:[* TO 2026-05-15T00:00:00.000Z]",
+      "facet":"true",
+      "useParams":"",
+      "_":"1778710538505"
+    }
+
+collection_ss dropdown
+    Prints and Drawings
+    Reference Library
+    Rare Books and Manuscripts
+    Archives
+    Paintings and Sculpture
+    Frames
+    Artists
+
+collection_ss - artists:
+    id
+    locnaf_ss
+    timestamp_dt
+others
+    id
+    title_ss
+    author_ss
+    timestamp_dt
+
+ran plan_delete_list.md
+make a modification to show this line:"<p><b><%= @docs.size %> record(s)</b> in <em><%= @collection %></em> with timestamp before <%= @yesterday %></p>" even when docs.size=0
+this line displays:"<p><b><%= @docs.size %> record(s)</b> in <em><%= @collection %></em> with timestamp before <%= @yesterday %></p>" before doing the query. Only display it after submitting the delete_lookup form.
+make the table in index.html.erb sortable
+In the timestamp column parse the value only to display yyyy-mm-dd, not the full timestamp.
+make timestamp column values only take up one row
+modify the table in home/index.html.erb with a new first column that contains a checkbox.  On clicking the checkbox, open a javascript confirm popup that says "Do you really want to delete this? and call a new method "delete_checked" that writes the id
+  value of the row to the logs.
+add id in the confirmDeleteChecked, like "Do you really want to delete this {id}"
+Save the state of the currect URL so when clicking the checkboxes in home/index.html.erb, the URL with parameters is passed to the delete_checked method in the home controller, and redirect to that URL
+in delete_checked, unencode the return_to parameter so "&amp;" is just "&"
+name the first column of the table in home/index.html.erb "Delete"
+

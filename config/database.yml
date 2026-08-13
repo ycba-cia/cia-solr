@@ -13,6 +13,9 @@ development:
   primary:
     <<: *default
     database: db/development.sqlite3
+  tms_harvester:
+    <<: *default
+    database: tms_serialization.db
   frames:
     adapter: mysql2
     encoding: utf8
@@ -21,7 +24,7 @@ development:
     host: ycba-collections-db.ctsmybupmova.us-east-1.rds.amazonaws.com
     database: ycba_collections_db
     port: 3306
-    sslca: /app/cia-solr/config/global-bundle.pem
+    sslca: /Users/ermadmix/Documents/RubymineProjects/cia-solr/config/global-bundle.pem
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -34,6 +37,9 @@ production:
   primary:
     <<: *default
     database: db/production.sqlite3
+  tms_harvester:
+    <<: *default
+    database: tms_serialization.db
   frames:
     adapter: mysql2
     encoding: utf8
@@ -42,4 +48,4 @@ production:
     host: ycba-collections-db.ctsmybupmova.us-east-1.rds.amazonaws.com
     database: ycba_collections_db
     port: 3306
-    sslca: /app/cia-solr/config/global-bundle.pem
+    sslca: /Users/ermadmix/Documents/RubymineProjects/cia-solr/config/global-bundle.pem

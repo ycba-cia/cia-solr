@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'artistimage/confirm', to: 'artistimage#confirm'
   get 'artistimage/update', to: 'artistimage#update'
 
+  get 'tms_harvester/index'
+
   #ERJ 9/11/2024 added devise_for
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   get '/unauth', :to => redirect('/unauth.html'), as: :unauth

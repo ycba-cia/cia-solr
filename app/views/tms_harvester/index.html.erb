@@ -1,0 +1,86 @@
+<h1>TMS OAI Harvester Dashboard</h1>
+<p>You are logged in as: <b><%= current_user.uid %></b></p>
+
+<div class="tms-harvester">
+  <div class="tms-tabs">
+    <button type="button" class="tms-tab-link<%= ' active' if @tab == 'counts' %>" data-tab="counts">Counts</button>
+    <button type="button" class="tms-tab-link<%= ' active' if @tab == 'list' %>" data-tab="list">List</button>
+  </div>
+
+  <div id="tms-tab-counts" class="tms-tab-panel<%= ' active' if @tab == 'counts' %>">
+    <table class="tms-grid">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @counts.each do |status, count| %>
+          <tr>
+            <td><%= status %></td>
+            <td><%= number_with_delimiter(count) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td><%= number_with_delimiter(@counts.values.sum) %></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div id="tms-tab-list" class="tms-tab-panel<%= ' active' if @tab == 'list' %>">
+    <%= form_tag("/tms_harvester/index", method: "get") do %>
+      <%= hidden_field_tag :tab, "list" %>
+      <%= label_tag :status, "Status:" %>
+      <%= select_tag :status, options_for_select(MetadataRecord::STATUSES, @status), onchange: "this.form.submit()" %>
+      <noscript><%= submit_tag "Filter" %></noscript>
+    <% end %>
+
+    <div class="paginate">
+      <%= paginate @records, params: { tab: "list", status: @status } %>
+    </div>
+
+    <table class="sortable tms-grid">
+      <thead>
+        <tr>
+          <th class="sorttable_numeric">Local Identifier</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @records.each do |record| %>
+          <tr>
+            <td><%= record.local_identifier %></td>
+            <td><%= record.created_at %></td>
+            <td><%= record.updated_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="paginate">
+      <%= paginate @records, params: { tab: "list", status: @status } %>
+    </div>
+  </div>
+</div>
+
+<p><a href="/home/index">Go back</a></p>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var links = document.querySelectorAll(".tms-tab-link");
+    links.forEach(function (link) {
+      link.addEventListener("click", function () {
+        links.forEach(function (l) { l.classList.remove("active"); });
+        document.querySelectorAll(".tms-tab-panel").forEach(function (p) { p.classList.remove("active"); });
+        link.classList.add("active");
+        document.getElementById("tms-tab-" + link.dataset.tab).classList.add("active");
+      });
+    });
+  });
+</script>
