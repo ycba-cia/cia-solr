@@ -8,7 +8,7 @@ class TmsHarvesterController < ApplicationController
     @status = MetadataRecord::STATUSES.include?(params[:status]) ? params[:status] : MetadataRecord::STATUSES.first
 
     @records = MetadataRecord
-                 .select(:local_identifier, :created_at, :updated_at)
+                 .select(:id, :local_identifier, :created_at, :updated_at, :diff)
                  .where(status: @status)
                  .order(Arel.sql("CAST(local_identifier AS INTEGER) asc"))
                  .page(params[:page])

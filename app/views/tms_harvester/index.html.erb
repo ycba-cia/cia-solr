@@ -50,6 +50,7 @@
           <th class="sorttable_numeric">Local Identifier</th>
           <th>Created At</th>
           <th>Updated At</th>
+          <th class="sorttable_nosort">Diff</th>
         </tr>
       </thead>
       <tbody>
@@ -64,6 +65,12 @@
             </td>
             <td><%= record.created_at %></td>
             <td><%= record.updated_at %></td>
+            <td>
+              <% if record.diff.present? %>
+                <a href="#" class="open-diff-link" data-diff-target="diff-content-<%= record.id %>">open diff</a>
+                <textarea id="diff-content-<%= record.id %>" hidden><%= record.diff %></textarea>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -86,6 +93,23 @@
         document.querySelectorAll(".tms-tab-panel").forEach(function (p) { p.classList.remove("active"); });
         link.classList.add("active");
         document.getElementById("tms-tab-" + link.dataset.tab).classList.add("active");
+      });
+    });
+
+    document.querySelectorAll(".open-diff-link").forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        var content = document.getElementById(link.dataset.diffTarget).value;
+        var win = window.open("", "_blank");
+        if (!win) return;
+        win.document.title = "Diff";
+        win.document.body.style.margin = "0";
+        var pre = win.document.createElement("pre");
+        pre.style.fontFamily = "monospace";
+        pre.style.whiteSpace = "pre";
+        pre.style.padding = "1em";
+        pre.textContent = content;
+        win.document.body.appendChild(pre);
       });
     });
   });

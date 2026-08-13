@@ -15,3 +15,7 @@ Use playwrite mcp to propose a browser layout to assess how it looks
 Modification 1:
 In the html table in index.html.erb list tab hyperlink the values in the local_identifier column to the URL in the harvesterLink field in connections.yml substituting ID with the local identifier
 
+Modification 2: 
+1. modify tms_harvester_controller select the diff column in the metadata_records query
+2. In the html table in index.html.erb list tab add a column called "Diff". When diff is not null display "open diff" in that column and open up a new browser tab with the contents of that field formatted and aligned
+
