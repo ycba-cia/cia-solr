@@ -12,3 +12,6 @@ tab 2. List:
 
 Use playwrite mcp to propose a browser layout to assess how it looks
 
+Modification 1:
+In the html table in index.html.erb list tab hyperlink the values in the local_identifier column to the URL in the harvesterLink field in connections.yml substituting ID with the local identifier
+

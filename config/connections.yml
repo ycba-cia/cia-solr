@@ -6,3 +6,4 @@ tmshost: 172.18.56.252 #prod
 #tmshost: 172.18.60.89 #dev
 
 databaseName: TMS
+harvesterLink: https://harvester-test.britishart.yale.edu/oaicatmuseum/OAIHandler?verb=GetRecord&identifier=oai:tms.ycba.yale.edu:{id}&metadataPrefix=lido

@@ -55,7 +55,13 @@
       <tbody>
         <% @records.each do |record| %>
           <tr>
-            <td><%= record.local_identifier %></td>
+            <td>
+              <% if @harvester_link.present? %>
+                <%= link_to record.local_identifier, @harvester_link.gsub('{id}', record.local_identifier.to_s), target: "_blank", rel: "noopener" %>
+              <% else %>
+                <%= record.local_identifier %>
+              <% end %>
+            </td>
             <td><%= record.created_at %></td>
             <td><%= record.updated_at %></td>
           </tr>

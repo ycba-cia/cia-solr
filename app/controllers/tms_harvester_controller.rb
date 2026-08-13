@@ -13,5 +13,16 @@ class TmsHarvesterController < ApplicationController
                  .order(Arel.sql("CAST(local_identifier AS INTEGER) asc"))
                  .page(params[:page])
                  .per(15)
+
+    @harvester_link = load_harvester_link
+  end
+
+  private
+
+  def load_harvester_link
+    connections_file = File.join(Rails.root, 'config', 'connections.yml')
+    return nil unless File.exist?(connections_file)
+
+    YAML.load_file(connections_file)['harvesterLink']
   end
 end
