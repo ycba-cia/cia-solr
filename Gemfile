@@ -61,7 +61,7 @@ gem 'mysql2', '~> 0.5.3'
 gem 'devise'
 
 #https://github.com/yalelibrary/yul-dc-blacklight/blob/main/Gemfile
-gem 'omniauth', '~> 2.1'
+gem 'omniauth', '~> 2.2'
 gem 'omniauth-cas', '~> 3.0.0'
 gem 'omniauth-rails_csrf_protection', '~> 2.0'
 
